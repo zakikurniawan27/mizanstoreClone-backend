@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('barang', {
+    await queryInterface.createTable('barangs', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'kategori',
+          model: 'kategoris',
           key: 'id',
         },
       },
@@ -33,14 +33,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'genre',
+          model: 'genres',
           key: 'id',
         },
       },
       idAuthor: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'author',
+          model: 'authors',
           key: 'id',
         },
       },
@@ -48,7 +48,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'publisher',
+          model: 'publishers',
           key: 'id',
         },
       },
@@ -60,14 +60,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'spesifikasi',
+          model: 'spesifikasis',
           key: 'id',
         },
       },
       idWishlist: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'wishlist',
+          model: 'wishlists',
           key: 'id',
         },
       },
