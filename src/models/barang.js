@@ -1,40 +1,43 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class barang extends Model {
+  class barangs extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      barang.belongsToMany(models.pembelian, {
+      barangs.belongsToMany(models.pembelians, {
         through: 'detailPembelian',
         foreignKey: 'idBarang',
         as: 'barang',
       });
-      barang.belongsTo(models.author, { foreignKey: 'idAuthor', as: 'author' });
-      barang.belongsTo(models.kategori, {
+      barangs.belongsTo(models.authors, {
+        foreignKey: 'idAuthor',
+        as: 'author',
+      });
+      barangs.belongsTo(models.kategoris, {
         foreignKey: 'idCategory',
         as: 'kategori',
       });
-      barang.belongsTo(models.publisher, {
+      barangs.belongsTo(models.publishers, {
         foreignKey: 'idPublisher',
         as: 'publisher',
       });
-      barang.belongsTo(models.genre, { foreignKey: 'idGenre', as: 'genre' });
-      barang.hasMany(models.ulasan, { as: 'ulas' });
-      barang.belongsTo(models.spesifikasi, {
+      barangs.belongsTo(models.genres, { foreignKey: 'idGenre', as: 'genre' });
+      barangs.hasMany(models.ulasans, { as: 'ulas' });
+      barangs.belongsTo(models.spesifikasis, {
         foreignKey: 'idSpesifikasi',
         as: 'spesifikasi',
       });
-      barang.belongsTo(models.wishlist, {
+      barangs.belongsTo(models.wishlists, {
         foreignKey: 'idWishlist',
         as: 'wishlist',
       });
     }
   }
-  barang.init(
+  barangs.init(
     {
       namaBarang: DataTypes.STRING,
       gambar: DataTypes.STRING,
@@ -52,8 +55,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'barang',
+      modelName: 'barangs',
     }
   );
-  return barang;
+  return barangs;
 };

@@ -1,24 +1,24 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class detailPembelian extends Model {
+  class detailPembelians extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      detailPembelian.belongsTo(models.barang, {
+      detailPembelians.belongsTo(models.barangs, {
         foreignKey: 'idBarang',
         as: 'barang',
       });
-      detailPembelian.belongsTo(models.pembelian, {
+      detailPembelians.belongsTo(models.pembelians, {
         foreignKey: 'idPembelian',
         as: 'pembeli',
       });
     }
   }
-  detailPembelian.init(
+  detailPembelians.init(
     {
       idBarang: DataTypes.INTEGER,
       idPembelian: DataTypes.INTEGER,
@@ -27,8 +27,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'detailPembelian',
+      modelName: 'detailPembelians',
     }
   );
-  return detailPembelian;
+  return detailPembelians;
 };
