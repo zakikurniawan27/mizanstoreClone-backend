@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
       },
       nomorTelepon: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       tanggalLahir: {
         type: Sequelize.DATE,
