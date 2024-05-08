@@ -9,7 +9,9 @@ module.exports = {
     host: process.env.DATABASE_HOST,
     port: process.env.DATABASE_PORT,
     dialect: 'mysql',
+    logging: console.log,
   },
+
   // test: {
   //   username: 'root',
   //   password: null,
