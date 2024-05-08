@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 
 const userRoute = require('./routes/pelanggan.route');
+const barangRoute = require('./routes/barang.route');
+
 const { sequelize } = require('./models');
 
 const app = express();
@@ -22,6 +24,7 @@ sequelize
   });
 
 app.use('/users', userRoute);
+app.use('/barangs', barangRoute);
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log('Server Running');
