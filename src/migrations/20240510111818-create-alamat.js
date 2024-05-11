@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('pelanggans', {
+    await queryInterface.createTable('alamats', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -16,27 +16,37 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       nomorTelepon: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
-      tanggalLahir: {
-        type: Sequelize.DATE,
-      },
-      jenisKelamin: {
-        type: Sequelize.STRING,
-      },
-      roles: {
+      provinsi: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: 'user',
+      },
+      kota: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      kecamatan: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      alamatLengkap: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      kodePos: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      pelangganId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          key: 'id',
+          model: 'pelanggans',
+        },
       },
       createdAt: {
         allowNull: false,
@@ -49,6 +59,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('pelanggans');
+    await queryInterface.dropTable('alamats');
   },
 };
