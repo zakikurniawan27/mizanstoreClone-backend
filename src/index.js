@@ -28,6 +28,7 @@ app.use('/users', userRoute);
 app.use('/barangs', barangRoute);
 app.use('/spesifikasis', spesifikasisRoutes);
 
+
 app.listen(process.env.SERVER_PORT, () => {
   console.log('Server Running');
 });

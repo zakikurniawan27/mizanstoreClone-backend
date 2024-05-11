@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       pelanggans.hasMany(models.ulasans, { as: 'ulas' });
       pelanggans.hasMany(models.wishlists, { as: 'wishlist' });
       pelanggans.hasMany(models.pembayarans, { as: 'bayar' });
+      pelanggans.hasMany(models.alamats, { as: 'alamat' });
     }
   }
   pelanggans.init(
@@ -23,11 +24,6 @@ module.exports = (sequelize, DataTypes) => {
       nomorTelepon: DataTypes.INTEGER,
       tanggalLahir: DataTypes.DATE,
       jenisKelamin: DataTypes.STRING,
-      provinsi: DataTypes.STRING,
-      kota: DataTypes.STRING,
-      kecamatan: DataTypes.STRING,
-      alamat: DataTypes.STRING,
-      kodePos: DataTypes.INTEGER,
       roles: DataTypes.STRING,
     },
     {
