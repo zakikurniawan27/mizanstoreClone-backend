@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
-      idCategory: {
+      kategoriId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -29,7 +29,7 @@ module.exports = {
           key: 'id',
         },
       },
-      idGenre: {
+      genreId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -37,13 +37,15 @@ module.exports = {
           key: 'id',
         },
       },
-      idAuthor: {
+      authorId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'authors',
-          key: 'id',
+          model: 'authors', // nama tabel target
+          key: 'id' // kunci utama tabel target
         },
-      },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      };
       idPublisher: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -64,7 +66,7 @@ module.exports = {
           key: 'id',
         },
       },
-      idWishlist: {
+      wishlistId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'wishlists',
