@@ -4,7 +4,10 @@ const cors = require('cors');
 
 const userRoute = require('./routes/pelanggan.route');
 const barangRoute = require('./routes/barang.route');
+const alamatRoute = require('./routes/alamat.route');
 const spesifikasisRoutes = require('./routes/spesifikasi.route');
+const authorRoute = require('./routes/author.route');
+const publisherRoute = require('./routes/publisher.route');
 
 const { sequelize } = require('./models');
 
@@ -26,8 +29,10 @@ sequelize
 
 app.use('/users', userRoute);
 app.use('/barangs', barangRoute);
+app.use('/address', alamatRoute);
 app.use('/spesifikasis', spesifikasisRoutes);
-
+app.use('/authors', authorRoute);
+app.use('/publishers', publisherRoute);
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log('Server Running');
