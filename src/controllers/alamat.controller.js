@@ -1,5 +1,5 @@
-/* eslint-disable consistent-return */
 const { alamats } = require('../models');
+const { pelanggans } = require('../models');
 
 const addAlamat = async (req, res) => {
   try {
@@ -106,9 +106,9 @@ const getDataAlamatById = async (req, res) => {
   try {
     const { id } = req.params;
     const alamat = await alamats.findByPk(id);
-    if (!id) {
+    if (!id || !alamat) {
       return res.status(400).send({
-        status: 400,
+        status: 404,
         message: 'data not found',
       });
     }
@@ -121,6 +121,38 @@ const getDataAlamatById = async (req, res) => {
     return res.status(404).send({
       status: 404,
       message: 'get all data failed',
+    });
+  }
+};
+
+const getDataAlamatByPelangganId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await pelanggans.findAll({
+      include: [
+        {
+          association: 'alamat',
+          where: { pelangganId: id },
+        },
+      ],
+    });
+
+    if (!data) {
+      return res.status(400).send({
+        status: 404,
+        message: 'data not found',
+      });
+    }
+
+    return res.status(200).send({
+      status: 200,
+      message: 'get data successfully',
+      pelanggan: data,
+    });
+  } catch (error) {
+    return res.status(404).send({
+      status: 404,
+      message: 'get data failed',
     });
   }
 };
@@ -141,4 +173,10 @@ const deleteAlamat = async (req, res) => {
     });
   }
 };
-module.exports = { addAlamat, updateAlamat, getDataAlamatById, deleteAlamat };
+module.exports = {
+  addAlamat,
+  updateAlamat,
+  getDataAlamatById,
+  deleteAlamat,
+  getDataAlamatByPelangganId,
+};
