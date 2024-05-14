@@ -6,13 +6,14 @@ const {
   updatePelanggan,
   deletePelanggan,
 } = require('../controllers/pelanggan.controller');
+const { verify } = require('../middlewares/verifytoken');
 
 const router = express.Router();
 
 router.post('/register', register);
 router.post('/login', login);
-router.get('/:id', getPelangganById);
-router.put('/updateuser/:id', updatePelanggan);
-router.delete('/deleteuser/:id', deletePelanggan);
+router.get('/:id', verify, getPelangganById);
+router.put('/updateuser/:id', verify, updatePelanggan);
+router.delete('/deleteuser/:id', verify, deletePelanggan);
 
 module.exports = router;

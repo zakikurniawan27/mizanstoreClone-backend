@@ -1,29 +1,18 @@
-const { authors } = require('../models');
+const { publishers } = require('../models');
 
-<<<<<<< HEAD
-// const getAll = async (req, res, next) => {
-//   const data = await authors.findAll();
-//   return res.status(200).json(data);
-// };
-const getAllAuthors = async (req, res) => {
-=======
-const getAllAuthor = async (req, res) => {
->>>>>>> 1a91d492259995cd1e082fe7485500e8477a54a3
+const getAllPublisher = async (req, res) => {
   try {
-    const data = await authors.findAll();
+    const data = await publishers.findAll();
     res.send(data);
   } catch (error) {
     res.status(500).send(error.message);
   }
 };
 
-<<<<<<< HEAD
-module.exports = { getAllAuthors };
-=======
-const getAuthorById = async (req, res) => {
+const getPublisherById = async (req, res) => {
   try {
     const { id } = req.params;
-    const data = await authors.findByPk(id);
+    const data = await publishers.findByPk(id);
     if (data) {
       res.send(data);
     } else {
@@ -34,12 +23,11 @@ const getAuthorById = async (req, res) => {
   }
 };
 
-const createAuthor = async (req, res) => {
+const createPublisher = async (req, res) => {
   try {
-    const { name, deskripsi } = req.body;
-    const newData = await authors.create({
+    const { name } = req.body;
+    const newData = await publishers.create({
       name,
-      deskripsi,
     });
     res.status(201).send(newData);
   } catch (error) {
@@ -47,14 +35,13 @@ const createAuthor = async (req, res) => {
   }
 };
 
-const updateAuthor = async (req, res) => {
+const updatePublisher = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, deskripsi } = req.body;
-    const updated = await authors.update(
+    const { name } = req.body;
+    const updated = await publishers.update(
       {
         name,
-        deskripsi,
       },
       {
         where: { id },
@@ -70,10 +57,10 @@ const updateAuthor = async (req, res) => {
   }
 };
 
-const deleteAuthor = async (req, res) => {
+const deletePublisher = async (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = await authors.destroy({
+    const deleted = await publishers.destroy({
       where: { id },
     });
     if (deleted) {
@@ -87,10 +74,9 @@ const deleteAuthor = async (req, res) => {
 };
 
 module.exports = {
-  getAllAuthor,
-  getAuthorById,
-  createAuthor,
-  updateAuthor,
-  deleteAuthor,
+  getAllPublisher,
+  getPublisherById,
+  createPublisher,
+  updatePublisher,
+  deletePublisher,
 };
->>>>>>> 1a91d492259995cd1e082fe7485500e8477a54a3
