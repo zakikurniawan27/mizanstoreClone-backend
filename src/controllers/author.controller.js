@@ -1,6 +1,14 @@
 const { authors } = require('../models');
 
+<<<<<<< HEAD
+// const getAll = async (req, res, next) => {
+//   const data = await authors.findAll();
+//   return res.status(200).json(data);
+// };
+const getAllAuthors = async (req, res) => {
+=======
 const getAllAuthor = async (req, res) => {
+>>>>>>> 1a91d492259995cd1e082fe7485500e8477a54a3
   try {
     const data = await authors.findAll();
     res.send(data);
@@ -9,6 +17,9 @@ const getAllAuthor = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
+module.exports = { getAllAuthors };
+=======
 const getAuthorById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -82,3 +93,4 @@ module.exports = {
   updateAuthor,
   deleteAuthor,
 };
+>>>>>>> 1a91d492259995cd1e082fe7485500e8477a54a3

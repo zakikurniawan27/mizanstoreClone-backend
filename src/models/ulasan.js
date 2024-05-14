@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       ulasans.belongsTo(models.barangs, {
-        foreignKey: 'idBarang',
+        foreignKey: 'barangId',
         as: 'barang',
       });
       ulasans.belongsTo(models.pelanggans, {
-        foreignKey: 'idPelanggan',
+        foreignKey: 'PelangganId',
         as: 'pelanggan',
       });
     }
@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
   ulasans.init(
     {
       body: DataTypes.TEXT,
-      idBarang: DataTypes.INTEGER,
-      idPelanggan: DataTypes.INTEGER,
+      barangId: DataTypes.INTEGER,
+      PelangganId: DataTypes.INTEGER,
     },
     {
       sequelize,
