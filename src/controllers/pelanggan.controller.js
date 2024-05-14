@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { pelanggans } = require('../models');
-const pelanggan = require('../models/pelanggan');
+const { alamats } = require('../models');
 
 const register = async (req, res) => {
   const {
@@ -26,29 +26,32 @@ const register = async (req, res) => {
   }
 
   const hashPassword = bcrypt.hashSync(password, 6);
-  await pelanggans.create(
-    {
-      firstName,
-      lastName,
-      email,
-      password: hashPassword,
-      nomorTelepon,
-      tanggalLahir,
-      jenisKelamin,
-      alamat: {
-        provinsi,
-        kota,
-        kecamatan,
-        alamatLengkap,
-        kodePos,
-        pelangganId: pelanggan.id,
-      },
-    },
-    {
-      include: ['alamat'],
-    }
-  );
+  const newUser = await pelanggans.create({
+    firstName,
+    lastName,
+    email,
+    password: hashPassword,
+    nomorTelepon,
+    tanggalLahir,
+    jenisKelamin,
+    provinsi,
+    kota,
+    kecamatan,
+    alamatLengkap,
+    kodePos,
+  });
 
+  const newAlamat = await alamats.create({
+    firstName,
+    lastName,
+    nomorTelepon,
+    provinsi,
+    kota,
+    kecamatan,
+    alamatLengkap,
+    kodePos,
+    pelangganId: newUser.id,
+  });
   return res.status(201).send({
     message: 'register succes',
   });

@@ -24,6 +24,11 @@ module.exports = (sequelize, DataTypes) => {
       nomorTelepon: DataTypes.INTEGER,
       tanggalLahir: DataTypes.DATE,
       jenisKelamin: DataTypes.STRING,
+      provinsi: DataTypes.STRING,
+      kota: DataTypes.STRING,
+      kecamatan: DataTypes.STRING,
+      alamatLengkap: DataTypes.TEXT,
+      kodePos: DataTypes.STRING,
       roles: DataTypes.STRING,
     },
     {

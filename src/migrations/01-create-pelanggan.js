@@ -33,6 +33,26 @@ module.exports = {
       jenisKelamin: {
         type: Sequelize.STRING,
       },
+      provinsi: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      kota: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      kecamatan: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      alamatLengkap: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      kodePos: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       roles: {
         type: Sequelize.STRING,
         allowNull: false,

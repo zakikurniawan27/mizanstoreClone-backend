@@ -1,6 +1,5 @@
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../../.env') });
-
 module.exports = {
   development: {
     username: process.env.DATABASE_USER,
@@ -9,9 +8,7 @@ module.exports = {
     host: process.env.DATABASE_HOST,
     port: process.env.DATABASE_PORT,
     dialect: 'mysql',
-    logging: console.log,
   },
-
   // test: {
   //   username: 'root',
   //   password: null,
