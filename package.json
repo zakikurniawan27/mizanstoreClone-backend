@@ -1,5 +1,5 @@
 {
-  "name": "mizanstoreClone",
+  "name": "mizanstoreClone-backend",
   "version": "1.0.0",
   "description": "project tugas harisenin (backend)",
   "main": "src/index.js",
@@ -16,7 +16,8 @@
     "eslint-plugin-import": "latest",
     "eslint-plugin-prettier": "latest",
     "nodemon": "latest",
-    "prettier": "latest"
+    "prettier": "latest",
+    "sequelize-cli": "^6.6.2"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

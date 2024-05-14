@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       genres.belongsTo(models.kategoris, {
-        foreignKey: 'idCategory',
+        foreignKey: 'kategoriId',
         as: 'kategori',
       });
       genres.hasMany(models.barangs, { as: 'barang' });
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   genres.init(
     {
       name: DataTypes.STRING,
-      idCategory: DataTypes.INTEGER,
+      kategoriId: DataTypes.INTEGER,
     },
     {
       sequelize,
