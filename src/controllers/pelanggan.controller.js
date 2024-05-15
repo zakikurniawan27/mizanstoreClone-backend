@@ -58,9 +58,9 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { firstName, password } = req.body;
+  const { email, password } = req.body;
 
-  const User = await pelanggans.findOne({ where: { firstName } });
+  const User = await pelanggans.findOne({ where: { email } });
 
   if (!User) {
     return res.status(400).send({
@@ -82,7 +82,7 @@ const login = async (req, res) => {
   }
 
   const token = jwt.sign(
-    { id: User.dataValues.id, firstName: User.dataValues.firstName },
+    { id: User.dataValues.id, email: User.dataValues.email },
     process.env.JWT_SECRET,
     { expiresIn: 4200 }
   );
@@ -107,6 +107,30 @@ const getPelangganById = async (req, res) => {
     status: 200,
     message: 'get user succes',
     user: data,
+  });
+};
+
+const getUserInfo = async (req, res) => {
+  const { id } = req.pelanggans;
+  const data = await pelanggans.findByPk(id, {
+    include: [
+      {
+        association: 'alamat',
+        where: { pelangganId: id },
+      },
+    ],
+  });
+
+  if (!data) {
+    return res.status(404).send({
+      status: 404,
+      message: 'data user empty',
+    });
+  }
+  return res.status(200).send({
+    status: 200,
+    message: 'get user succes',
+    users: data,
   });
 };
 
@@ -161,6 +185,7 @@ module.exports = {
   register,
   login,
   getPelangganById,
+  getUserInfo,
   updatePelanggan,
   deletePelanggan,
 };
