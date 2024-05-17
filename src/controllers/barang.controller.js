@@ -1,84 +1,85 @@
-const { barangs } = require('../models');
+const {
+  barangs,
+  spesifikasis,
+  authors,
+  genres,
+  publishers,
+  ulasans,
+  wishlists,
+  kategoris,
+} = require('../models');
 
-class BarangController {
-  static async getAllBarangs(req, res) {
-    try {
-      const allBarangs = await barangs.findAll({
-        include: [
-          'kategori',
-          'genre',
-          'author',
-          'publisher',
-          'spesifikasi',
-          'wishlist',
-        ],
-      });
-      res.status(200).json(allBarangs);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+// Mendapatkan semua barang
+const getAllBarangs = async (req, res) => {
+  try {
+    const data = await barangs.findAll({
+      include: [
+        {
+          model: spesifikasis,
+          as: 'spesifikasi',
+        },
+        {
+          model: authors,
+          as: 'author',
+        },
+        {
+          model: genres,
+          as: 'genre',
+        },
+        {
+          model: publishers,
+          as: 'publisher',
+        },
+        {
+          model: ulasans,
+          as: 'ulas',
+        },
+        {
+          model: kategoris,
+          as: 'kategori',
+        },
+      ],
+    });
+    res.send(data);
+  } catch (error) {
+    res.status(500).send(error.message);
   }
+};
 
-  static async getBarangById(req, res) {
-    try {
-      const { id } = req.params;
-      const barang = await barangs.findByPk(id, {
-        include: [
-          'kategori',
-          'genre',
-          'author',
-          'publisher',
-          'spesifikasi',
-          'wishlist',
-        ],
-      });
-      if (barang) {
-        res.status(200).json(barang);
-      } else {
-        res.status(404).json({ message: 'Barang tidak ditemukan' });
-      }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+// Mendapatkan barang berdasarkan ID
+const getBarangById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await barangs.findByPk(id);
+    if (data) {
+      res.send(data);
+    } else {
+      res.status(404).send('Data tidak ditemukan');
     }
+  } catch (error) {
+    res.status(500).send(error.message);
   }
+};
 
-  static async createBarang(req, res) {
-    try {
-      const newBarang = await barangs.create(req.body);
-      res.status(201).json(newBarang);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
+// Menghapus barang berdasarkan ID
+const deleteBarang = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await barangs.destroy({
+      where: { id },
+    });
+    if (deleted) {
+      res.send('Data berhasil dihapus');
+    } else {
+      res.status(404).send('Data tidak ditemukan');
     }
+  } catch (error) {
+    res.status(500).send(error.message);
   }
+};
 
-  static async updateBarang(req, res) {
-    try {
-      const { id } = req.params;
-      const updated = await barangs.update(req.body, { where: { id } });
-      if (updated[0] > 0) {
-        const updatedBarang = await barangs.findByPk(id);
-        res.status(200).json(updatedBarang);
-      } else {
-        res.status(404).json({ message: 'Barang tidak ditemukan' });
-      }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  }
-
-  static async deleteBarang(req, res) {
-    try {
-      const { id } = req.params;
-      const deleted = await barangs.destroy({ where: { id } });
-      if (deleted) {
-        res.status(204).send();
-      } else {
-        res.status(404).json({ message: 'Barang tidak ditemukan' });
-      }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  }
-}
-
-module.exports = BarangController;
+module.exports = {
+  getAllBarangs,
+  getBarangById,
+  deleteBarang,
+};

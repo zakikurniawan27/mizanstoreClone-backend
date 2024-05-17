@@ -2,11 +2,6 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class barangs extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       barangs.belongsToMany(models.pembelians, {
         through: 'detailPembelian',
@@ -14,25 +9,25 @@ module.exports = (sequelize, DataTypes) => {
         as: 'barang',
       });
       barangs.belongsTo(models.authors, {
-        foreignKey: 'idAuthor',
+        foreignKey: 'authorId',
         as: 'author',
       });
       barangs.belongsTo(models.kategoris, {
-        foreignKey: 'idCategory',
+        foreignKey: 'kategoriId',
         as: 'kategori',
       });
       barangs.belongsTo(models.publishers, {
         foreignKey: 'idPublisher',
         as: 'publisher',
       });
-      barangs.belongsTo(models.genres, { foreignKey: 'idGenre', as: 'genre' });
+      barangs.belongsTo(models.genres, { foreignKey: 'genreId', as: 'genre' });
       barangs.hasMany(models.ulasans, { as: 'ulas' });
       barangs.belongsTo(models.spesifikasis, {
         foreignKey: 'idSpesifikasi',
         as: 'spesifikasi',
       });
       barangs.belongsTo(models.wishlists, {
-        foreignKey: 'idWishlist',
+        foreignKey: 'wishlistId',
         as: 'wishlist',
       });
     }
@@ -42,13 +37,15 @@ module.exports = (sequelize, DataTypes) => {
       namaBarang: DataTypes.STRING,
       gambar: DataTypes.STRING,
       status: DataTypes.BOOLEAN,
-      idCategory: DataTypes.INTEGER,
-      idGenre: DataTypes.INTEGER,
-      idAuthor: DataTypes.INTEGER,
+      kategoriId: DataTypes.INTEGER,
+      genreId: DataTypes.INTEGER,
+      authorId: DataTypes.INTEGER,
       idPublisher: DataTypes.INTEGER,
       deskripsi: DataTypes.TEXT,
+      overView: DataTypes.TEXT,
+      primacy: DataTypes.TEXT,
       idSpesifikasi: DataTypes.INTEGER,
-      idWishlist: DataTypes.INTEGER,
+      wishlistId: DataTypes.INTEGER,
       harga: DataTypes.STRING,
       diskon: DataTypes.INTEGER,
       jumlahBarang: DataTypes.INTEGER,

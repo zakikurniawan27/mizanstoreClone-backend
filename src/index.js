@@ -3,8 +3,12 @@ const express = require('express');
 const cors = require('cors');
 
 const userRoute = require('./routes/pelanggan.route');
+const genreRoute = require('./routes/genre.route');
+const kategoriRoute = require('./routes/kategori.route');
+const ulasanRoute = require('./routes/ulasan.route');
 const barangRoute = require('./routes/barang.route');
-const spesifikasisRoutes = require('./routes/spesifikasi.route');
+const alamatRoute = require('./routes/alamat.route');
+const spesifikasiRoute = require('./routes/spesifikasi.route');
 const authorRoute = require('./routes/author.route');
 const publisherRoute = require('./routes/publisher.route');
 
@@ -27,8 +31,12 @@ sequelize
   });
 
 app.use('/users', userRoute);
-app.use('/barangs', barangRoute);
-app.use('/spesifikasis', spesifikasisRoutes);
+app.use('/genre', genreRoute);
+app.use('/kategori', kategoriRoute);
+app.use('/ulasan', ulasanRoute);
+app.use('/barang', barangRoute);
+app.use('/address', alamatRoute);
+app.use('/spesifikasi', spesifikasiRoute);
 app.use('/authors', authorRoute);
 app.use('/publishers', publisherRoute);
 
