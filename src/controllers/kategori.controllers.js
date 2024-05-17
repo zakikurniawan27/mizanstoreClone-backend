@@ -1,12 +1,25 @@
-const { kategoris } = require('../models');
+const { kategoris, genres, barangs, authors } = require('../models');
 
-// const getAll = async (req, res, next) => {
-//   const data = await authors.findAll();
-//   return res.status(200).json(data);
-// };
 const getAllKategoris = async (req, res) => {
   try {
-    const data = await kategoris.findAll();
+    const data = await kategoris.findAll({
+      include: [
+        {
+          model: genres,
+          as: 'genre',
+        },
+        {
+          model: barangs,
+          as: 'barang',
+          include: [
+            {
+              model: authors,
+              as: 'author',
+            },
+          ],
+        },
+      ],
+    });
     res.send(data);
   } catch (error) {
     res.status(500).send(error.message);
