@@ -40,12 +40,12 @@ module.exports = {
       authorId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'authors', // nama tabel target
-          key: 'id' // kunci utama tabel target
+          model: 'authors',
+          key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
-      };
+        onDelete: 'SET NULL',
+      },
       idPublisher: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -55,6 +55,14 @@ module.exports = {
         },
       },
       deskripsi: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      overView: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      primacy: {
         type: Sequelize.TEXT,
         allowNull: false,
       },

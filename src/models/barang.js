@@ -42,6 +42,8 @@ module.exports = (sequelize, DataTypes) => {
       authorId: DataTypes.INTEGER,
       idPublisher: DataTypes.INTEGER,
       deskripsi: DataTypes.TEXT,
+      overView: DataTypes.TEXT,
+      primacy: DataTypes.TEXT,
       idSpesifikasi: DataTypes.INTEGER,
       wishlistId: DataTypes.INTEGER,
       harga: DataTypes.STRING,

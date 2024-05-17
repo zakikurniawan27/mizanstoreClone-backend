@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'barang',
       });
       ulasans.belongsTo(models.pelanggans, {
-        foreignKey: 'PelangganId',
+        foreignKey: 'pelangganId',
         as: 'pelanggan',
       });
     }
