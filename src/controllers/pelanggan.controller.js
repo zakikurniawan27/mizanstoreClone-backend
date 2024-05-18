@@ -95,7 +95,7 @@ const login = async (req, res) => {
 
 const getPelangganById = async (req, res) => {
   const idPelanggan = req.params.id;
-  const data = await pelanggans.findAll({ where: { id: idPelanggan } });
+  const data = await pelanggans.findByPk(idPelanggan);
 
   if (!data) {
     return res.status(404).send({
@@ -136,13 +136,33 @@ const getUserInfo = async (req, res) => {
 
 const updatePelanggan = async (req, res) => {
   const idPelanggan = req.params.id;
-  const { firstName, lastName, nomorTelepon } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    nomorTelepon,
+    tanggalLahir,
+    jenisKelamin,
+    provinsi,
+    kota,
+    kecamatan,
+    alamatLengkap,
+    kodePos,
+  } = req.body;
 
   const up = await pelanggans.update(
     {
       firstName,
       lastName,
+      email,
       nomorTelepon,
+      tanggalLahir,
+      jenisKelamin,
+      provinsi,
+      kota,
+      kecamatan,
+      alamatLengkap,
+      kodePos,
     },
     {
       where: { id: idPelanggan },
