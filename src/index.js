@@ -11,6 +11,8 @@ const alamatRoute = require('./routes/alamat.route');
 const spesifikasiRoute = require('./routes/spesifikasi.route');
 const authorRoute = require('./routes/author.route');
 const publisherRoute = require('./routes/publisher.route');
+const pembelianRoute = require('./routes/pembelian.route');
+const pembayaranRoute = require('./routes/pembayaran.route');
 
 const { sequelize } = require('./models');
 
@@ -39,7 +41,8 @@ app.use('/address', alamatRoute);
 app.use('/spesifikasi', spesifikasiRoute);
 app.use('/authors', authorRoute);
 app.use('/publishers', publisherRoute);
-
+app.use('/pembelian', pembelianRoute);
+app.use('/pembayaran', pembayaranRoute);
 app.listen(process.env.SERVER_PORT, () => {
   console.log('Server Running');
 });
