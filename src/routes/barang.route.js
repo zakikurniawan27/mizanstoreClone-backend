@@ -4,10 +4,12 @@ const {
   getAllBarangs,
   getBarangById,
   deleteBarang,
+  searchBarangs,
 } = require('../controllers/barang.controller');
 
 router.get('/', getAllBarangs);
-router.get('/:id', getBarangById);
+router.get('/search', searchBarangs);
+router.get('/detail/:id', getBarangById);
 router.delete('/:id', deleteBarang);
 
 module.exports = router;
